@@ -1,6 +1,6 @@
 <template>
   <!-- 所有的item都展示同一个图片，同一个文字 -->
-  <div class="tar-bar-item" @click="ItemClick">
+  <div class="tab-bar-item" @click="ItemClick">
     <!-- 添加样式要把插槽放在div中 ，防止在调用slot加载时替换掉 -->
     <div v-if="!isActive">
       <slot name="item-icon"></slot>
@@ -22,7 +22,10 @@
 export default {
   name: "TabBarItem",
   props: {
-    path: String,
+    path: {
+      type:String,
+      required: true
+    },
     activeColor: {//“点击按钮”动态修改样式
       type: String,
       default: "red" //默认颜色
@@ -49,23 +52,24 @@ export default {
   methods: {
     ItemClick() {
       //出现错误：vue-router.esm.js?fe87:2060 Uncaught (in promise) Error: Avoided redundant navigation to current location: "/profile".
-      this.$router.replace(this.path);
+   this.$router.replace(this.path);
+     
     }
   }
 };
 </script>
 
 <style scoped>
-.tar-bar-item {
+.tab-bar-item {
   flex: 1;
   text-align: center;
   height: 49px;
   font-size: 14px;
 }
-.tar-bar-item img {
+.tab-bar-item img {
   width: 24px;
   height: 24px;
-  margin-top: 3px;
+  margin-top: 4px;
   vertical-align: middle;
   margin-bottom: 2px;
 }
